@@ -7,7 +7,11 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne+Mono">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Condensed">
 		<style>
+			body { 
+				text-align: center; 
+			}
 			div {
+				text-align: center;
 				font-family: 'Saira Condensed', sans-serif;
 				font-size: 30px;
 				width: 1200px;
@@ -17,25 +21,25 @@
 			}
 			H1 {
 				font-family: 'Fredoka One', sans-serif;
-        		font-size: 80px;
+        			font-size: 80px;
 			}
 			H2 {
 				font-family: 'Syne Mono', sans-serif;
-        		font-size: 40px;
+        			font-size: 40px;
 			}
 			#p1 {
 				font-family: 'Saira Condensed', sans-serif;
-        		font-size: 40px;
+        			font-size: 40px;
 			}
 			#p2 {
 				font-family: 'Saira Condensed', sans-serif;
-        		font-size: 30px;
+        			font-size: 30px;
 			}
 		</style>
 	</head>
 
 <body>
-<CENTER>
+
 <H1>The Home of YAKKO</H1>
 <H2>[Y]et [A]nother [K]VM [K]onfigurator for [O]penShift</H2>
 <A HREF=https://github.com/ozchamo/YAKKO> <IMG SRC="yakkologo.png"> </A>
@@ -49,13 +53,11 @@ for standing up multinode OpenShift clusters in a hurry!
 
 <BR><BR><HR><BR>
 
+<center>
 <div> 
-		If you want to run up an OpenShift cluster, and have a big PC/small server (say a quad-core/32-48GB RAM) then YAKKO might be for you. There are many cookbooks out there and they require that you do a lot of <B>manual</B> work. 
-<BR>
-<BR>
-<B>YAKKO avoids Manual Work!</B>
-<BR>
-<BR>
+If you want to run up an OpenShift cluster, and have a big PC/small server (say a quad-core/32-48GB RAM) then YAKKO might be for you. There are many cookbooks out there and they require that you do a lot of <B>manual</B> work. 
+
+<BR> <BR> <B>YAKKO avoids Manual Work!</B> <BR> <BR>
 
 YAKKO was built around the concept of having ONE script/installer/manager that does it all, using the underlying operating system as the installation/operation platform and resource server/service. As a prime example, YAKKO depends on libvirt/KVM and so it will install and configure required packages on your server to build and run OpenShift VMs, just as it may use your server as the DNS resource should you not have your own DNS. Because of this, YAKKO is a little opinionated, but then again, it's not built for creating "production ready" clusters, and so it should suit most people with a passing need or interest in having an OpenShift cluster around (or... again!).
 
