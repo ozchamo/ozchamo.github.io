@@ -29,8 +29,9 @@
 <H1 style="color:white;font-family:courier new;">Sample Run - YAKKO Creating an OpenShift Cluster</H1>
 
 <div class="yakkooutput"> 
-[root@bigbox /]# cd /YAKKO
-[root@bigbox YAKKO]# ./yakko
+
+<b>[root@bigbox /]# cd /YAKKO</b>
+<b>[root@bigbox YAKKO]# ./yakko</b>
 <div class="greenoutput">
 _______________________________________________________________________________________
 
@@ -388,8 +389,288 @@ Password:      2uoGm-tEIqx-pyxIs-rsEV7
 - To make infrastructure changes use:  "yakko infra &lt;options>"  
 - To make operational changes use:     "yakko ops &lt;options>" 
 
-[root@bigbox YAKKO]# 
+
+<b>[root@bigbox YAKKO]# oc get nodes</b>
+NAME       STATUS   ROLES           AGE    VERSION
+master-0   Ready    master,worker   111m   v1.20.0+5fbfd19
+master-1   Ready    master,worker   112m   v1.20.0+5fbfd19
+master-2   Ready    master,worker   111m   v1.20.0+5fbfd19
+
+
+<b>[root@bigbox YAKKO]# oc get clusteroperators</b>
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.7.1     True        False         False      91m
+baremetal                                  4.7.1     True        False         False      109m
+cloud-credential                           4.7.1     True        False         False      115m
+cluster-autoscaler                         4.7.1     True        False         False      107m
+config-operator                            4.7.1     True        False         False      109m
+console                                    4.7.1     True        False         False      81m
+csi-snapshot-controller                    4.7.1     True        False         False      98m
+dns                                        4.7.1     True        False         False      106m
+etcd                                       4.7.1     True        False         False      106m
+image-registry                             4.7.1     True        False         False      102m
+ingress                                    4.7.1     True        False         False      103m
+insights                                   4.7.1     True        False         False      102m
+kube-apiserver                             4.7.1     True        False         False      105m
+kube-controller-manager                    4.7.1     True        False         False      105m
+kube-scheduler                             4.7.1     True        False         False      104m
+kube-storage-version-migrator              4.7.1     True        False         False      107m
+machine-api                                4.7.1     True        False         False      106m
+machine-approver                           4.7.1     True        False         False      108m
+machine-config                             4.7.1     True        False         False      106m
+marketplace                                4.7.1     True        False         False      106m
+monitoring                                 4.7.1     True        False         False      86m
+network                                    4.7.1     True        False         False      108m
+node-tuning                                4.7.1     True        False         False      106m
+openshift-apiserver                        4.7.1     True        False         False      101m
+openshift-controller-manager               4.7.1     True        False         False      108m
+openshift-samples                          4.7.1     True        False         False      102m
+operator-lifecycle-manager                 4.7.1     True        False         False      106m
+operator-lifecycle-manager-catalog         4.7.1     True        False         False      105m
+operator-lifecycle-manager-packageserver   4.7.1     True        False         False      103m
+service-ca                                 4.7.1     True        False         False      109m
+storage                                    4.7.1     True        False         False      109m
+
+
+<b>[root@bigbox YAKKO]# ./yakko infra addnode</b>
+_______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________
+
+
+>>> ADD A NEW WORKER NODE  <<<
+
+NOTE: YAKKO will NOT TEST for capacity to handle this request, proceed with caution
+
+How many cores should be allocated to this node [2]:
+
+How much RAM (MiB) should be allocated to this node (2560-16384MiB) [4000]: 3000
+
+<div class="greenoutput">_______________________________________________________________________________________
+
+STAGE 1: KVM Worker Node Configuration (Time start: 16:05pm) </div>
+
+Configure OCP worker VM node(s) - proceed [y/n]? y
+Restarting virtual network
+Updated network net-ocp-prod persistent config and live state
+Updating and restarting HAproxy
+Building OCP node: node-1 (MAC Addr: 52:54:00:4a:66:20)
+
+Starting install...
+Retrieving file rhcos-live-kernel-x86_64...               | 9.1 MB  00:00:00
+Retrieving file rhcos-live-initramfs.x86_64.img...        |  82 MB  00:00:00
+Allocating 'node-1.prod.localdomain.qcow2'                |  20 GB  00:00:00
+
+Domain is still running. Installation may be in progress.
+Waiting for the installation to complete.
+Domain has shutdown. Continuing.
+Domain creation completed.
+Restarting guest.
+Node(s) ready to begin integration into the cluster. This will take a few minutes...
+To observe node status, run 'oc get nodes' on another terminal.
+
+Node (node-1) has been added to the cluster and is in READY state
+<div class="greenoutput">Time elapsed:  5 mins 55 secs</div>
+
+
+<b>[root@bigbox YAKKO]# oc get nodes</b>
+NAME       STATUS   ROLES           AGE     VERSION
+master-0   Ready    master,worker   125m    v1.20.0+5fbfd19
+master-1   Ready    master,worker   125m    v1.20.0+5fbfd19
+master-2   Ready    master,worker   125m    v1.20.0+5fbfd19
+node-1     Ready    worker          7m29s   v1.20.0+5fbfd19
+
+
+<b>[root@bigbox YAKKO]# ./yakko ops mastersched</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+>>> CHANGE MASTERS' SCHEDULING STATE  <<<
+
+
+This is an important change that may affect the behaviour of your workloads
+and is simply being provided by YAKKO as a mechanism to change new nodes quickly.
+Use at your own risk!
+
+Masters are currently >> SCHEDULABLE <<
+
+Change masters to [NOT SCHEDULABLE] - proceed [y/n]? y
+scheduler.config.openshift.io/cluster edited
+
+
+<b>[root@bigbox YAKKO]# oc get nodes</b>
+NAME       STATUS   ROLES    AGE    VERSION
+master-0   Ready    master   129m   v1.20.0+5fbfd19
+master-1   Ready    master   130m   v1.20.0+5fbfd19
+master-2   Ready    master   129m   v1.20.0+5fbfd19
+node-1     Ready    worker   12m    v1.20.0+5fbfd19
+     
+
+<b>[root@bigbox YAKKO]# ./yakko ops htpasswd</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+>>> ENABLE ADMIN and LOCAL PASSWORDS IN OPENSHIFT (HTPasswd) <<<
+
+You must enter a new administrator who will be granted cluster-admin role.
+Enter a new admin username to add to the HTPasswd provider [administrator]: 
+
+Enter password for user [administrator]: 
+Retype password for confirmation: 
+Warning: resource oauths/cluster is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by oc apply. oc apply should only be used on resources created declaratively by either oc create --save-config or oc apply. The missing annotation will be patched automatically.
+oauth.config.openshift.io/cluster configured
+Adding password for user administrator
+secret/htpass-secret created
+Warning: User 'administrator' not found
+clusterrole.rbac.authorization.k8s.io/cluster-admin added: "administrator"
+
+Added [administrator] admin user with cluster-admin role successfuly
+
+Disable 'kubeadmin' account - proceed [y/n]? y
+Deleting secret for 'kubeadmin' account
+secret "kubeadmin" deleted
+Note that the system:admin account is still available
+
+
+<b>[root@bigbox YAKKO]# ./yakko ops useradd</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+Enter the name for a new user to add to the HTPasswd provider: matthew
+Enter password for user [matthew]: 
+Retype password for confirmation: 
+Adding password for user matthew
+secret/htpass-secret patched
+Warning: User 'matthew' not found
+clusterrole.rbac.authorization.k8s.io/self-provisioner added: "matthew"
+
+Success: added user  and assigned self-provisioner role.
+It may take a few moments before you can login.
+
+
+<b>[root@bigbox YAKKO]# oc login -u matthew</b>
+oc login -u matthew
+Authentication required for https://api.prod.localdomain:6443 (openshift)
+Username: matthew
+Password:
+Login successful.
+
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+
+
+<b>[root@bigbox YAKKO]# oc login -u administrator</b>
+oc login -u administrator
+Logged into "https://api.prod.localdomain:6443" as "administrator" using existing credentials.
+
+You have access to 62 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+
+
+<b>[root@bigbox YAKKO]# ./yakko ops yakkotest</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+>>> DEPLOY YAKKO TEST ON THE CLUSTER!  <<<
+
+Cannot deploy YAKKO test app as there is no registry defined.
+First, run "yakko ops localregistry"
+
+
+<b>[root@bigbox YAKKO]# ./yakko ops localregistry</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+>>> ENABLE LOCAL REGISTRY IN OPENSHIFT <<<
+
+Enabling local registry (images will be lost on registry restart) - proceed [y/n]? y
+config.imageregistry.operator.openshift.io/cluster patched
+config.imageregistry.operator.openshift.io/cluster patched
+
+
+<b>[root@bigbox YAKKO]# ./yakko ops yakkotest</b>
+<div class="greenoutput"> _______________________________________________________________________________________
+
+ YAKKO: Yet Another KVM Konfigurator for Openshift
+_______________________________________________________________________________________ </div>
+>>> DEPLOY YAKKO TEST ON THE CLUSTER!  <<<
+
+Now using project "yakkotest" on server "https://api.prod.localdomain:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
+
+--> Found image b49449b (13 days old) in image stream "openshift/httpd" under tag "latest" for "httpd:latest"
+
+    Apache httpd 2.4
+    ----------------
+    Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.
+
+    Tags: builder, httpd, httpd-24
+
+    * A source build using source code from https://github.com/ozchamo/yakko-test.git will be created
+      * The resulting image will be pushed to image stream tag "yakko:latest"
+      * Use 'oc start-build' to trigger a new build
+
+--> Creating resources ...
+    imagestream.image.openshift.io "yakko" created
+    buildconfig.build.openshift.io "yakko" created
+    deployment.apps "yakko" created
+    service "yakko" created
+--> Success
+    WARNING: No container image registry has been configured with the server. Automatic builds and deployments may not function.
+    Build scheduled, use 'oc logs -f buildconfig/yakko' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/yakko'
+    Run 'oc status' to view your app.
+route.route.openshift.io/yakko exposed
+_________________________________________________________________________
+
+
+OpenShift will begin building the project
+Inspect progress by issuing 'oc get pods -n yakkotest'
+
+Once yakkotest is up, point your browser to: http://yakkotest.apps.prod.localdomain
+
+
+/... A FEW MINUTES LATER .../
+
+
+<b>[root@bigbox YAKKO]# oc get pods</b>
+NAME                     READY   STATUS      RESTARTS   AGE
+yakko-1-build            0/1     Completed   0          101s
+yakko-2-build            0/1     Completed   0          43s
+yakko-84ff5b4448-7j8z6   1/1     Running     0          8s
+
+
+/... AND... EMBEDDED ..../
+
+
+<b>[root@bigbox YAKKO]# curl  http://yakkotest.apps.prod.localdomain</b>
+
+<div style="background-color:white;color:black";>
+<center>
+<img src=yakkologo.png>
+<h1>If you can see this, "yakkotest" worked!</h1> <h2>(which means your YAKKO cluster also works)</h2> <h3>Enjoy!<h3>
+<A HREF=https://github.com/ozchamo/yakko-test>Where did this come from?</A>
+And so, what's <A HREF=https://github.com/ozchamo/YAKKO>YAKKO</A> then?
 
 </div>
+
+</div>
+
 </body>
 </html>
