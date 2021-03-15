@@ -2,31 +2,33 @@
 <html>
 	<head>
 		<meta name="google-site-verification" content="tB8k6DO-wZQo8-V8oJW6bNTtohmUvCp1qvv7lE0aIj0" />
-		<title>Home of YAKKO</title>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka+One">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne+Mono">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Condensed">
+		<title>YAKKO: Sample Run</title>
 		<style>
+			body {
+				background-color: black;
+				border: 20px solid black;
+			}
+
 			.yakkooutput {
 				white-space: pre-line;
-				background-color: black;
 				font-family: 'courier new', sans-serif;
 				font-size: 18px;
+				max-width=1800px;
 				color: white;
-				padding: 30px;
-				margin: 0px;
 			}
+
 			.greenoutput {
 				color: lawngreen;
+				font-weight: bold;
 			}
 		</style>
 	</head>
 
 <body>
 
+<H1 style="color:white;font-family:courier new;">Sample Run - YAKKO Creating an OpenShift Cluster</H1>
 
 <div class="yakkooutput"> 
-
 [root@bigbox /]# cd /YAKKO
 [root@bigbox YAKKO]# ./yakko
 <div class="greenoutput">
@@ -65,7 +67,7 @@ STAGE 2: Load pull secret (Time start: 21:19pm)
 </div>
 There is no pull secret on file.
 Please copy/paste pull secret from [ https://cloud.redhat.com/openshift/install/metal/user-provisioned ]:
-{"auths":{"cloud.openshift.com":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"dcifuent@redhat.com"},"quay.io":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"dcifuent@redhat.com"},"registry.connect.redhat.com":{"auth":"NBA2OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"dcifuent@redhat.com"},"registry.redhat.io":{"auth":"BA24OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"dcifuent@redhat.com"}}}
+{"auths":{"cloud.openshift.com":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"username@redhat.com"},"quay.io":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"username@redhat.com"},"registry.connect.redhat.com":{"auth":"NBA2OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"username@redhat.com"},"registry.redhat.io":{"auth":"BA24OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"username@redhat.com"}}}
 <div class="greenoutput">
 _______________________________________________________________________________________
 
@@ -362,9 +364,9 @@ FINISHED OCP INSTALLATION - Fri 12 Mar 21:56:51 AEDT 2021
 Time elapsed:  37 mins 31 secs
 
 IMPORTANT:
-	- you DO NOT have a registry --> yakko ops localregistry
-	- you cannot access the cluster from another computer --> yakko ops openaccess
-	- you do not have any users created --> yakko ops htpasswd administrator &  yakko ops useradd &lt;user>
+	- you DO NOT have a registry -> yakko ops localregistry
+	- you cannot access the cluster from another computer -> yakko ops openaccess
+	- you have no user DB -> yakko ops htpasswd administrator &  yakko ops useradd &lt;user>
 _______________________________________________________________________________________
 
 </div>
@@ -388,6 +390,6 @@ Password:      2uoGm-tEIqx-pyxIs-rsEV7
 
 [root@bigbox YAKKO]# 
 
-
 </div>
+</body>
 </html>
