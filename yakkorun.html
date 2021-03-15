@@ -224,17 +224,17 @@ The server has [4] CPU cores and [8] threads
 Generating INSTALL CONFIG file...
 
 Creating manifests...
-INFO Consuming Install Config from target directory 
-WARNING Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
-INFO Manifests created in: /YAKKO/install-prod/manifests and /YAKKO/install-prod/openshift 
+<span style="color:#43C6DB">INFO</span> Consuming Install Config from target directory 
+<span style="color:#835C3B">WARNING</span> Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
+<span style="color:#43C6DB">INFO</span> Manifests created in: /YAKKO/install-prod/manifests and /YAKKO/install-prod/openshift 
 
 Creating OCP Cluster ignition files required for node configuration
-INFO Consuming Openshift Manifests from target directory 
-INFO Consuming OpenShift Install (Manifests) from target directory 
-INFO Consuming Master Machines from target directory 
-INFO Consuming Worker Machines from target directory 
-INFO Consuming Common Manifests from target directory 
-INFO Ignition-Configs created in: /YAKKO/install-prod and /YAKKO/install-prod/auth 
+<span style="color:#43C6DB">INFO </span>Consuming Openshift Manifests from target directory 
+<span style="color:#43C6DB">INFO </span>Consuming OpenShift Install (Manifests) from target directory 
+<span style="color:#43C6DB">INFO </span>Consuming Master Machines from target directory 
+<span style="color:#43C6DB">INFO </span>Consuming Worker Machines from target directory 
+<span style="color:#43C6DB">INFO </span>Consuming Common Manifests from target directory 
+<span style="color:#43C6DB">INFO </span>Ignition-Configs created in: /YAKKO/install-prod and /YAKKO/install-prod/auth 
 <div class="greenoutput">
 _______________________________________________________________________________________
 
@@ -311,11 +311,11 @@ STAGE 15: OCP Cluster Bootstrap (Time start: 21:23pm)
 You can observe the output of the bootstrap node at this stage by issuing:
 ssh -i /root/.ssh/id_rsa_ocp core@bootstrap.prod.localdomain sudo journalctl -b -f -u bootkube.service
 
-INFO Waiting up to 20m0s for the Kubernetes API at https://api.prod.localdomain:6443... 
-INFO API v1.20.0+5fbfd19 up                       
-INFO Waiting up to 30m0s for bootstrapping to complete... 
-INFO It is now safe to remove the bootstrap resources 
-INFO Time elapsed: 15m23s                         
+<span style="color:#43C6DB">INFO </span>Waiting up to 20m0s for the Kubernetes API at https://api.prod.localdomain:6443... 
+<span style="color:#43C6DB">INFO </span>API v1.20.0+5fbfd19 up                       
+<span style="color:#43C6DB">INFO </span>Waiting up to 30m0s for bootstrapping to complete... 
+<span style="color:#43C6DB">INFO </span>It is now safe to remove the bootstrap resources 
+<span style="color:#43C6DB">INFO </span>Time elapsed: 15m23s                         
 Domain bootstrap.prod.localdomain destroyed
 
 Domain bootstrap.prod.localdomain has been undefined
@@ -342,17 +342,17 @@ Some useful commands while waiting:
 - oc get nodes  (always good to see if your cluster has all the nodes it should...)
 - oc adm top nodes (to see how your nodes are performing based on their CPU/RAM constraints...
 
-INFO Waiting up to 40m0s for the cluster at https://api.prod.localdomain:6443 to initialize... 
+<span style="color:#43C6DB">INFO </span>Waiting up to 40m0s for the cluster at https://api.prod.localdomain:6443 to initialize... 
 
 Deleting Prometheus pods for memory reconfiguration
 pod "prometheus-k8s-0" deleted
 pod "prometheus-k8s-1" deleted
-INFO Waiting up to 10m0s for the openshift-console route to be created... 
-INFO Install complete!                            
-INFO To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/YAKKO/install-prod/auth/kubeconfig' 
-INFO Access the OpenShift web-console here: https://console-openshift-console.apps.prod.localdomain 
-INFO Login to the console with user: "kubeadmin", and password: "2uoGm-tEIqx-pyxIs-rsEV7" 
-INFO Time elapsed: 18m9s                          
+<span style="color:#43C6DB">INFO </span>Waiting up to 10m0s for the openshift-console route to be created... 
+<span style="color:#43C6DB">INFO </span>Install complete!                            
+<span style="color:#43C6DB">INFO </span>To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/YAKKO/install-prod/auth/kubeconfig' 
+<span style="color:#43C6DB">INFO </span>Access the OpenShift web-console here: https://console-openshift-console.apps.prod.localdomain 
+<span style="color:#43C6DB">INFO </span>Login to the console with user: "kubeadmin", and password: "2uoGm-tEIqx-pyxIs-rsEV7" 
+<span style="color:#43C6DB">INFO </span>Time elapsed: 18m9s                          
 
 CSR Approvals (oc get csr) stopped...
 <div class="greenoutput">
