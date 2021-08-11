@@ -1,271 +1,325 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<meta name="google-site-verification" content="tB8k6DO-wZQo8-V8oJW6bNTtohmUvCp1qvv7lE0aIj0" />
-		<title>YAKKO: Sample Run</title>
-		<style>
-			body {
-				background-color: black;
-				border: 20px solid black;
-			}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style type="text/css">
+pre { white-space: pre-wrap; }
+.f6 > .bold,.bold > .f6 { color: #00FFFF; font-weight: normal; font-size: 18px; }
 
-			.yakkooutput {
-				white-space: pre-line;
-				font-family: 'courier new', sans-serif;
-				font-size: 18px;
-				max-width=1800px;
-				color: white;
-			}
+.f9 { color: #E5E5E5; }
+.b9 { background-color: #000000; font-size: 18px; }
+.f9 > .bold,.bold > .f9, body.f9 > pre > .bold {
+  /* Bold is heavy black on white, or bright white
+     depending on the default background */
+  color: #FFFFFF;
+  font-weight: normal;
+}
+.reverse {
+  /* CSS does not support swapping fg and bg colours unfortunately,
+     so just hardcode something that will look OK on all backgrounds. */
+  color: #000000; background-color: #E5E5E5;
+}
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.blink { text-decoration: blink; }
 
-			.greenoutput {
-				color: lawngreen;
-				font-weight: bold;
-			}
-		</style>
-	</head>
+/* Avoid pixels between adjacent span elements.
+   Note this only works for lines less than 80 chars
+   where we close span elements on the same line.
+*/
+</style>
+</head>
 
-<body>
+<body class="f9 b9">
+<pre>
 
-<H1 style="color:white;font-family:courier new;">Sample Run - YAKKO Creating an OpenShift Cluster</H1>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-<div class="yakkooutput"> 
+<span class="f6"><span class="bold"><span class="bold"> YAKKO: Yet Another KVM Konfigurator for Openshift</span></span></span>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-<b>[root@bigbox /]# cd /YAKKO</b>
-<b>[root@bigbox YAKKO]# ./yakko</b>
-<div class="greenoutput">
-_______________________________________________________________________________________
 
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-_______________________________________________________________________________________
+<span class="f6"><span class="bold"><span class="bold">STAGE 1: Gather Cluster Configuration information (Time start: 15:58pm)</span></span></span>
 
-STAGE 1: Gather Cluster Configuration information (Time start: 21:19pm)
-</div>
-Enter the name of the OpenShift cluster to create ("prod"): 
-Cluster [prod] will be created
+This section will gather relevant information to build an OpenShift cluster on this host.
+Questions are separated by '----'. Default options are in [brackets], press enter to accept them.
 
-Enter the DOMAIN name you wish to setup your cluster under ("localdomain"): 
+<span class="bold">----</span>
+Enter the name of the OpenShift cluster to create [&quot;test&quot;]: 
 
-Enter the SUBNET (/24) inside KVM that you want cluster under ("192.168.140"): 
+<span class="bold">----</span>
+Enter the DOMAIN name to setup your cluster under [&quot;home&quot;]: 
 
-Enter an (existing) directory where you wish to place the OCP VM disks ("/mnt/VMs/ocp"): 
+<span class="bold">----</span>
+It is recommended that this host have a fixed IP address and a resolvable hostname.
+Enter the IP address of this host on your network [&quot;192.168.100.2&quot;]: 
 
+<span class="bold">----</span>
+Enter the SUBNET (/24) inside KVM that you want cluster under [&quot;192.168.140&quot;]: 
+
+<span class="bold">----</span>
+YAKKO uses HAproxy to loadbalance access to OpenShift nodes, while also allowing
+or restricting access to either THIS host only, or clients in your local network.
+(You can change this later using 'yakko infra changeaccess')
+Allow 'open' cluster access from other clients (other than this server) (Y/N) [Y]? 
+
+<span class="bold">----</span>
+What release version do you want to install:
+    1) Latest release available (4.8.4)
+    2) Releases on disk
+        - 4.8.2
+        - 4.8.3
+        - 4.8.4
+    3) Older releases (hard! you will need to pick image version and installer version) 
+    4) Latest release candidate (good luck!)
+    5) Latest pre-release nightly (unknown territory...)
+Pick option number from above (1-5) [1]: 
+
+<span class="bold">----</span>
+Enter the directory where you wish to place the OCP VM disks for this cluster [&quot;/mnt/VMs&quot;]: /mnt/VMs/desktops/fedora-RedHat.qcow2 not reset as customized by admin to system_u:object_r:svirt_image_t:s0:c397,c766
+Changing permissions for [/mnt/VMs] and all paths above.
+All members of the tree need to have read/exec access so that user 'qemu' can run VMs in the destination.
+
+<span class="bold">----</span>
+How many MASTER nodes do you want to configure (1 or 3) [3]: 
+
+<span class="bold">----</span>
+How much RAM (MiB) should be allocated to MASTER nodes [16000]: 
+
+<span class="bold">----</span>
 Worker nodes can be built at cluster creation or later.
-To build a cluster with 3 schedulable MASTER nodes, type '0'
-How many worker nodes do you want to configure at cluster build time [0]: 
-No worker nodes were requested. You can add nodes later with YAKKO.
+To build a cluster with ONLY schedulable MASTER node(s), type '0'
+How many worker nodes do you want to configure at cluster build time [2]: 
 
-How much RAM (MiB) should be allocated to MASTER nodes [10000]: 12000
+<span class="bold">----</span>
+How much RAM (MiB) should be allocated to WORKER nodes [5000]: 
 
-Use latest OCP version available (4.7.1) - proceed [y/n]? y
+<span class="bold">----</span>
+Requested OpenShift configuration requires:
+- RAM:  50000 MiB 
+- DISK: 150 GiB 
+Accept this configuration for cluster build (Y/N) [Y]? 
 
-Attempt AUTOMATIC creation of cluster [prod] - proceed [y/n]? y
-<div class="greenoutput">
-_______________________________________________________________________________________
+<span class="bold">----</span>
+Attempt AUTOMATIC creation of cluster &quot;test&quot; (Y/N) [Y]? 
 
-STAGE 2: Load pull secret (Time start: 21:19pm)
-</div>
-There is no pull secret on file.
-Please copy/paste pull secret from [ https://cloud.redhat.com/openshift/install/metal/user-provisioned ]:
-{"auths":{"cloud.openshift.com":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"username@redhat.com"},"quay.io":{"auth":"c4TlbnNoaWZ0LXJlbGVhc2UtZGV2K3JobnNhZGNpZnVlbnQxbmJ0aXlvbnN4aXlpcDVqdXQ1eHpjaGF2dHM6T0dYWEZZSTNET01XSzc1M0EzVkNPS05PVFBBQ1ZDTjNMNDdBWVdWTlVCNlhTVEhOSE9XUU1XV1owTlBVV0o0Uw==","email":"username@redhat.com"},"registry.connect.redhat.com":{"auth":"NBA2OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"username@redhat.com"},"registry.redhat.io":{"auth":"BA24OTE4NjB8dWhjLTFOQnRpeW9uU1hpWUlwNWp1dDV4ekNoYXZ0czpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNakJoWVRBeE9EZzBOak0wTURNek9UTTFZak15T0daa1pHRXhPR0psWVNKOS5PMFlSZjQ3RC1zaVh3RGhQTGc5T2xTYVhMbGVfY09mVDdNNXpYTnNPeHZGZTh1X0xoSW5xNG41dHFmUXVFODRHMVBCd0FRUGkzQ0JYZFdzczkwaEdQcmY1OG5ZYW9aS0hvcWNXYzJxbWdxcXdnOU95Rll6MDhXMTFDWFc0M3pEeTNKaDhmc2FLd0ZRbkZJdk14Ni1EMS16cjF6OHkwSG1nN29qd2RwSHk3YlYtVVZxWHhTUUR1cmVxSTJsRXhHMzJYNzdKcE9CdHgzTGdXZC0wY0p1NUVZclZWV09NbUdtM3NfUUc1T3pvLVk3UjVnWFEweF85ZEFveGNtZmg0bGVCeERHWW9pSHJudVZlX0ViYjFmUmFjWENkTmxnbm55VGhINXg3NEVKc0hoYXZ3ZVNnamNJSHR5Tk1WM1BDWTNibDFRU1dOdjNfNW5hcVdYZzAzNF9YUGVyOWxNQTVZM19UaGNlcUw2MF9yZzNqamdpXy1LWnZCX2dYX0Q2REdoRlBacnJnajQxdGlWSkxOX3RTaThsR1l1NDJ6WWJ2TExES095bnNYNEJ4cG5MQ1c5T2xlakJvVW0ybDU1N24xOTlDV3ZUOUh5ZkdsbUdMQXU3NDBvWXBoLW1CRGg3eTFLUkM2SHdId2VsdHQ3VDZ6c2JaaFlzcjRqekd5aDBLRC1UM1FmaW1mNEp3QjVOVkVtSkxYZHRUMjBPaHRyV1ZwVkRQWmF2TFZYdzlxNHNwajBVWGFXLVlBWE12cEVKOElSTlpoQUtVTFdNTmh4YVhUbWlqLURnemJIZThac0lrR0RmSlNhd1YzakNvVms4elRGVDlDdGxQdXVWTHl3SzNzRDh5SGd0UEExdU1mZ254WTBiR0NGV2ZGYUNMYkhydWlzTVpUeW02Q0NpY1ZWQQ==","email":"username@redhat.com"}}}
-<div class="greenoutput">
-_______________________________________________________________________________________
+<span class="bold">----</span>
+Although YAKKO automates OpenShift cluster creation, you may want to customise the 
+'install-config.yaml' configuration file before cluster bootstrap, for example,
+when wanting to add a proxy server for indirect connection to the internet.
+Pause for edit of 'install-config.yaml' when file becomes available (Y/N) [N]? 
 
-STAGE 3: Obtain OCP binaries (Installer and RHCOS) (Time start: 21:20pm)
-</div>
-OCP Version 4.7.1 is already downloaded...
-<div class="greenoutput">
-_______________________________________________________________________________________
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-STAGE 4: Libvirt package install/start (Time start: 21:20pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">STAGE 2: Load pull secret (Time start: 15:59pm)</span></span></span>
+
+Using saved pull secret
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 3: Obtain OCP binaries (Installer and RHCOS) (Time start: 15:59pm)</span></span></span>
+
+Using OCP Version 4.8.4 already downloaded...
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 4: Libvirt package install/start (Time start: 15:59pm)</span></span></span>
+
 Libvirt is installed and active
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 5: SSH key configuration (Time start: 21:20pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 5: SSH key configuration (Time start: 15:59pm)</span></span></span>
+
 Generating public/private rsa key pair.
-Your identification has been saved in /root/.ssh/id_rsa_ocp
-Your public key has been saved in /root/.ssh/id_rsa_ocp.pub
+Your identification has been saved in /root/.ssh/id_rsa_ocp.test
+Your public key has been saved in /root/.ssh/id_rsa_ocp.test.pub
 The key fingerprint is:
-SHA256:uUKdhmOSKJpfN7X2pWonbWTmu/wlgW4QiliQtZmvQoM root@bigbox
+SHA256:5/GMDwBlRdH49IlWxkDCF31AcEQLNk2ee62j7/YjYTU root@terminus
 The key's randomart image is:
 +---[RSA 4096]----+
-|  .o.            |
-|  .. +           |
-|    =   .        |
-| . + + + + .     |
-|E = + B S . .    |
-|.+ . = + =+  .   |
-|o . o + +*o o .  |
-| . o . +o+=o o   |
-|  .    ..=*+.    |
+|        o+==O%B. |
+|       o  oo+=*o.|
+|      .    + =+o |
+|       .    + oE.|
+|        S o.  o +|
+|         + = o o |
+|          + + +  |
+|           o o.o |
+|            o++.o|
 +----[SHA256]-----+
-Agent pid 2048818
-Identity added: /root/.ssh/id_rsa_ocp (root@bigbox)
-<div class="greenoutput">
-_______________________________________________________________________________________
+Agent pid 289496
 
-STAGE 6: Virtual Network Configuration (Time start: 21:20pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 6: Virtual Network Configuration (Time start: 15:59pm)</span></span></span>
+
 Cleaning up network...
 Only NAT is supported for now
 YAKKO will create all infrastructure in the 192.168.140/24 subnet with preallocated IP addresses:
 Bootstrap: 192.168.140.9
 Masters: 192.168.140.10 192.168.140.11 and 192.168.140.12
-Workers: and
 
-Defining network at /YAKKO/install-prod/net-ocp-prod.xml
-Network net-ocp-prod defined from /YAKKO/install-prod/net-ocp-prod.xml
+Defining network at /YAKKO/install-test/net-yakko-test.xml
+Network net-yakko-test defined from /YAKKO/install-test/net-yakko-test.xml
 
 Setting network to start on boot...
-Network net-ocp-prod marked as autostarted
+Network net-yakko-test marked as autostarted
 
-Re/starting network to ensure it's operational...
+Re/starting network to ensure it is operational...
 
-Network net-ocp-prod started
-<div class="greenoutput">
-_______________________________________________________________________________________
+Network net-yakko-test started
 
-STAGE 7: DNS Configuration (Time start: 21:20pm)
-</div>
-Configuring dnsmask plugin in NETWORKMANAGER
+Virtual network is up
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 7: DNS Configuration (Time start: 15:59pm)</span></span></span>
+
+Configuring dnsmask plugin in NETWORKMANAGER and
+adding DNSmasq configuration as /etc/NetworkManager/dnsmasq.d/dnsmasq-yakko-test.conf
 nameserver 127.0.0.53
 
 ATTENTION: This system is using systemd-resolved. YAKKO needs to add a DNS stub in /etc/systemd/resolved.conf
 
 DNS test - from Virtual Network 192.168.140.0:
-api-int.prod.localdomain has address 192.168.140.1
-etcd-0.prod.localdomain has address 192.168.140.10
-etcd-1.prod.localdomain has address 192.168.140.11
-etcd-2.prod.localdomain has address 192.168.140.12
+api-int.test.home has address 192.168.140.1
+etcd-0.test.home has address 192.168.140.10
+etcd-1.test.home has address 192.168.140.11
+etcd-2.test.home has address 192.168.140.12
 Using domain server:
 Name: 192.168.140.1
 Address: 192.168.140.1#53
 Aliases: 
 
-_etcd-server-ssl._tcp.prod.localdomain has SRV record 0 10 2380 etcd-2.prod.localdomain.
-_etcd-server-ssl._tcp.prod.localdomain has SRV record 0 10 2380 etcd-1.prod.localdomain.
-_etcd-server-ssl._tcp.prod.localdomain has SRV record 0 10 2380 etcd-0.prod.localdomain.
+_etcd-server-ssl._tcp.test.home has SRV record 0 10 2380 etcd-2.test.home.
+_etcd-server-ssl._tcp.test.home has SRV record 0 10 2380 etcd-1.test.home.
+_etcd-server-ssl._tcp.test.home has SRV record 0 10 2380 etcd-0.test.home.
 
 DNS test - from the host:
-api.prod.localdomain has address 192.168.140.1
-etcd-0.prod.localdomain has address 192.168.140.10
-etcd-1.prod.localdomain has address 192.168.140.11
-etcd-2.prod.localdomain has address 192.168.140.12
+api.test.home has address 192.168.100.2
+etcd-0.test.home has address 192.168.140.10
+etcd-1.test.home has address 192.168.140.11
+etcd-2.test.home has address 192.168.140.12
 Using domain server:
 Name: 127.0.0.1
 Address: 127.0.0.1#53
 Aliases: 
 
-testing.apps.prod.localdomain has address 192.168.140.1
-<div class="greenoutput">
-_______________________________________________________________________________________
+testing.apps.test.home has address 192.168.100.2
 
-STAGE 8: Configure HTTP server for installation of all cluster components (Time start: 21:20pm)
-</div>
-OCP will be made available by HTTP server from directory /YAKKO/images/4.7.1
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-changing security context of '/YAKKO/images/4.7.1/rhcos-live-rootfs.x86_64.img'
-changing security context of '/YAKKO/images/4.7.1/openshift-install'
-changing security context of '/YAKKO/images/4.7.1/oc'
-changing security context of '/YAKKO/images/4.7.1/rhcos-live-kernel-x86_64'
-changing security context of '/YAKKO/images/4.7.1/README.md'
-changing security context of '/YAKKO/images/4.7.1/rhcos-live-initramfs.x86_64.img'
-changing security context of '/YAKKO/images/4.7.1/rhcos-metal.x86_64.raw.gz'
-changing security context of '/YAKKO/images/4.7.1/kubectl'
-changing security context of '/YAKKO/images/4.7.1'
+<span class="f6"><span class="bold"><span class="bold">STAGE 8: Configure HTTP server for installation of all cluster components (Time start: 15:59pm)</span></span></span>
+
+Using port [8080] for RHCOS image delivery
+OCP will be made available by HTTP server from directory /YAKKO/images/4.8.4
+
+changing security context of '/YAKKO/images/4.8.2/rhcos-live-rootfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.2/openshift-install'
+changing security context of '/YAKKO/images/4.8.2/oc'
+changing security context of '/YAKKO/images/4.8.2/rhcos-live-kernel-x86_64'
+changing security context of '/YAKKO/images/4.8.2/README.md'
+changing security context of '/YAKKO/images/4.8.2/rhcos-live-initramfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.2/rhcos-metal.x86_64.raw.gz'
+changing security context of '/YAKKO/images/4.8.2/.downloadcomplete'
+changing security context of '/YAKKO/images/4.8.2/kubectl'
+changing security context of '/YAKKO/images/4.8.2'
+changing security context of '/YAKKO/images/4.8.4/rhcos-live-rootfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.4/openshift-install'
+changing security context of '/YAKKO/images/4.8.4/oc'
+changing security context of '/YAKKO/images/4.8.4/rhcos-live-kernel-x86_64'
+changing security context of '/YAKKO/images/4.8.4/README.md'
+changing security context of '/YAKKO/images/4.8.4/rhcos-live-initramfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.4/rhcos-metal.x86_64.raw.gz'
+changing security context of '/YAKKO/images/4.8.4/.downloadcomplete'
+changing security context of '/YAKKO/images/4.8.4/kubectl'
+changing security context of '/YAKKO/images/4.8.4'
+changing security context of '/YAKKO/images/4.8.3/rhcos-live-rootfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.3/openshift-install'
+changing security context of '/YAKKO/images/4.8.3/oc'
+changing security context of '/YAKKO/images/4.8.3/rhcos-live-kernel-x86_64'
+changing security context of '/YAKKO/images/4.8.3/README.md'
+changing security context of '/YAKKO/images/4.8.3/rhcos-live-initramfs.x86_64.img'
+changing security context of '/YAKKO/images/4.8.3/rhcos-metal.x86_64.raw.gz'
+changing security context of '/YAKKO/images/4.8.3/.downloadcomplete'
+changing security context of '/YAKKO/images/4.8.3/kubectl'
+changing security context of '/YAKKO/images/4.8.3'
 changing security context of '/YAKKO/images/index.html'
 changing security context of '/YAKKO/images'
-ValueError: File context for /YAKKO/images(/.*)? already defined
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 9: Configure Load Balancer  (Time start: 21:20pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 9: Configure Load Balancer  (Time start: 15:59pm)</span></span></span>
+
+Setting up HAproxy with OPEN access
+You can change this later with 'yakko infra changeaccess'
 Creating the HA Proxy Config...
 
 ● haproxy.service - HAProxy Load Balancer
      Loaded: loaded (/usr/lib/systemd/system/haproxy.service; enabled; vendor preset: disabled)
-     Active: active (running) since Fri 2021-03-12 21:20:33 AEDT; 12ms ago
-    Process: 2050503 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q $OPTIONS (code=exited, status=0/SUCCESS)
-   Main PID: 2050505 (haproxy)
-      Tasks: 9 (limit: 77007)
-     Memory: 67.4M
-        CPU: 52ms
+     Active: active (running) since Wed 2021-08-11 15:59:40 AEST; 10ms ago
+    Process: 290407 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q $OPTIONS (code=exited, status=0/SUCCESS)
+   Main PID: 290410 (haproxy)
+      Tasks: 9 (limit: 76991)
+     Memory: 67.0M
+        CPU: 46ms
      CGroup: /system.slice/haproxy.service
-             ├─2050505 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid
-             └─2050507 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid
+             ├─290410 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -f /etc/haproxy/yakko
+             └─290413 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -f /etc/haproxy/yakko
 
-Mar 12 21:20:33 bigbox haproxy[2050505]: [WARNING] 070/212033 (2050505) : config : missing timeouts for prox…er-80'.
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | While not properly invalid, you will certainly encounter vario…roblems
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | with such a configuration. To fix this, please ensure that all…llowing
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
-Mar 12 21:20:33 bigbox haproxy[2050505]: [WARNING] 070/212033 (2050505) : config : missing timeouts for prox…r-443'.
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | While not properly invalid, you will certainly encounter vario…roblems
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | with such a configuration. To fix this, please ensure that all…llowing
-Mar 12 21:20:33 bigbox haproxy[2050505]:    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
-Mar 12 21:20:33 bigbox haproxy[2050505]: [NOTICE] 070/212033 (2050505) : New worker #1 (2050507) forked
-Mar 12 21:20:33 bigbox systemd[1]: Started HAProxy Load Balancer.
-Hint: Some lines were ellipsized, use -l to show in full.
-<div class="greenoutput">
-_______________________________________________________________________________________
+Aug 11 15:59:40 terminus haproxy[290410]: [WARNING] 222/155940 (290410) : config : missing timeouts for proxy 'test-ingress-router-80'.
+Aug 11 15:59:40 terminus haproxy[290410]:    | While not properly invalid, you will certainly encounter various problems
+Aug 11 15:59:40 terminus haproxy[290410]:    | with such a configuration. To fix this, please ensure that all following
+Aug 11 15:59:40 terminus haproxy[290410]:    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
+Aug 11 15:59:40 terminus haproxy[290410]: [WARNING] 222/155940 (290410) : config : missing timeouts for proxy 'test-ingress-router-443'.
+Aug 11 15:59:40 terminus haproxy[290410]:    | While not properly invalid, you will certainly encounter various problems
+Aug 11 15:59:40 terminus haproxy[290410]:    | with such a configuration. To fix this, please ensure that all following
+Aug 11 15:59:40 terminus haproxy[290410]:    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
+Aug 11 15:59:40 terminus haproxy[290410]: [NOTICE] 222/155940 (290410) : New worker #1 (290413) forked
+Aug 11 15:59:40 terminus systemd[1]: Started HAProxy Load Balancer.
 
-STAGE 10: Configure Firewall (Time start: 21:20pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 10: Configure Firewall (Time start: 15:59pm)</span></span></span>
+
 Firewall is not running. Configuration is not required.
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 11: OCP Configuration for Installation (Time start: 21:20pm)
-</div>
-Writing ocp-setup-env script for administration. Run "source /YAKKO/ocp-setup-env" to load post-install...
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 11: OCP Configuration for Installation (Time start: 15:59pm)</span></span></span>
+
+Writing ocp-setup-env script for administration. Run &quot;source /YAKKO/ocp-setup-env&quot; to load post-install...
 The server has [4] CPU cores and [8] threads
 
 Generating INSTALL CONFIG file...
+Making a reference copy of install-config.yaml as install-config.yaml.original
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 12: OCP Ingest manifest and ignition files (Time start: 15:59pm)</span></span></span>
 
 Creating manifests...
-<span style="color:#43C6DB">INFO</span> Consuming Install Config from target directory 
-<span style="color:#835C3B">WARNING</span> Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
-<span style="color:#43C6DB">INFO</span> Manifests created in: /YAKKO/install-prod/manifests and /YAKKO/install-prod/openshift 
 
 Creating OCP Cluster ignition files required for node configuration
-<span style="color:#43C6DB">INFO </span>Consuming Openshift Manifests from target directory 
-<span style="color:#43C6DB">INFO </span>Consuming OpenShift Install (Manifests) from target directory 
-<span style="color:#43C6DB">INFO </span>Consuming Master Machines from target directory 
-<span style="color:#43C6DB">INFO </span>Consuming Worker Machines from target directory 
-<span style="color:#43C6DB">INFO </span>Consuming Common Manifests from target directory 
-<span style="color:#43C6DB">INFO </span>Ignition-Configs created in: /YAKKO/install-prod and /YAKKO/install-prod/auth 
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 12: KVM Bootstrap Host Configuration (Time start: 21:20pm)
-</div>
-Building OCP node: bootstrap (MAC Addr: 52:54:00:4a:66:09)
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-Starting install...
-Retrieving file rhcos-live-kernel-x86_64...                                                    | 9.1 MB  00:00:00     
-Retrieving file rhcos-live-initramfs.x86_64.img...                                             |  82 MB  00:00:00     
-Allocating 'bootstrap.prod.localdomain.qcow2'                                                   |  20 GB  00:00:00     
+<span class="f6"><span class="bold"><span class="bold">STAGE 13: KVM Bootstrap Host Configuration (Time start: 15:59pm)</span></span></span>
 
-Domain is still running. Installation may be in progress.
-Waiting for the installation to complete.
-Domain has shutdown. Continuing.
-Domain creation completed.
-Restarting guest.
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 13: KVM Master Nodes Configuration (Time start: 21:21pm)
-</div>
-Building OCP node: master-0 (MAC Addr: 52:54:00:4a:66:10)
+<span class="f6"><span class="bold">Building OCP node: bootstrap.test.home</span></span>
+
+Configuration:
+- vCPUs:  2
+- Memory: 6000 MiB
+- MAC Addr: 52:54:00:4a:8c:09
 
 Starting install...
-Retrieving file rhcos-live-kernel-x86_64...                                                    | 9.1 MB  00:00:00     
-Retrieving file rhcos-live-initramfs.x86_64.img...                                             |  82 MB  00:00:00     
-Allocating 'master-0.prod.localdomain.qcow2'                                                    |  20 GB  00:00:00     
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'bootstrap.test.home.qcow2'                      |  20 GB  00:00     
 
 Domain is still running. Installation may be in progress.
 Waiting for the installation to complete.
@@ -273,12 +327,23 @@ Domain has shutdown. Continuing.
 Domain creation completed.
 Restarting guest.
 
-Building OCP node: master-1 (MAC Addr: 52:54:00:4a:66:11)
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 14: KVM Master Nodes Configuration (Time start: 16:00pm)</span></span></span>
+
+
+<span class="f6"><span class="bold">Building OCP node: master-0.test.home</span></span>
+
+Configuration:
+- vCPUs:  4
+- Memory: 14000 MiB
+- MAC Addr: 52:54:00:4a:8c:10
 
 Starting install...
-Retrieving file rhcos-live-kernel-x86_64...                                                    | 9.1 MB  00:00:00     
-Retrieving file rhcos-live-initramfs.x86_64.img...                                             |  82 MB  00:00:00     
-Allocating 'master-1.prod.localdomain.qcow2'                                                    |  20 GB  00:00:00     
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'master-0.test.home.qcow2'                       |  30 GB  00:00     
 
 Domain is still running. Installation may be in progress.
 Waiting for the installation to complete.
@@ -286,12 +351,18 @@ Domain has shutdown. Continuing.
 Domain creation completed.
 Restarting guest.
 
-Building OCP node: master-2 (MAC Addr: 52:54:00:4a:66:12)
+
+<span class="f6"><span class="bold">Building OCP node: master-1.test.home</span></span>
+
+Configuration:
+- vCPUs:  4
+- Memory: 14000 MiB
+- MAC Addr: 52:54:00:4a:8c:11
 
 Starting install...
-Retrieving file rhcos-live-kernel-x86_64...                                                    | 9.1 MB  00:00:00     
-Retrieving file rhcos-live-initramfs.x86_64.img...                                             |  82 MB  00:00:00     
-Allocating 'master-2.prod.localdomain.qcow2'                                                    |  20 GB  00:00:01     
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'master-1.test.home.qcow2'                       |  30 GB  00:00     
 
 Domain is still running. Installation may be in progress.
 Waiting for the installation to complete.
@@ -299,378 +370,149 @@ Domain has shutdown. Continuing.
 Domain creation completed.
 Restarting guest.
 
-No worker nodes were requested. These can be added later by issuing: 
 
-yakko addnode
-<div class="greenoutput">
-_______________________________________________________________________________________
+<span class="f6"><span class="bold">Building OCP node: master-2.test.home</span></span>
 
-STAGE 14: KVM Worker Node Configuration (Time start: 21:23pm)
+Configuration:
+- vCPUs:  4
+- Memory: 14000 MiB
+- MAC Addr: 52:54:00:4a:8c:12
 
-_______________________________________________________________________________________
+Starting install...
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'master-2.test.home.qcow2'                       |  30 GB  00:00     
 
-STAGE 15: OCP Cluster Bootstrap (Time start: 21:23pm)
-</div>
+Domain is still running. Installation may be in progress.
+Waiting for the installation to complete.
+Domain has shutdown. Continuing.
+Domain creation completed.
+Restarting guest.
+
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 15: KVM Worker Node Configuration (Time start: 16:02pm)</span></span></span>
+
+Restarting virtual network
+Updated network net-yakko-test persistent config and live state
+Updating and restarting HAproxy
+
+<span class="f6"><span class="bold">Building OCP node: node-1.test.home</span></span>
+
+Configuration:
+- vCPUs:  2
+- Memory: 4000 MiB
+- MAC Addr: 52:54:00:4a:8c:20
+
+Starting install...
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'node-1.test.home.qcow2'                         |  30 GB  00:00     
+
+Domain is still running. Installation may be in progress.
+Waiting for the installation to complete.
+Domain has shutdown. Continuing.
+Domain creation completed.
+Restarting guest.
+
+Restarting virtual network
+Updated network net-yakko-test persistent config and live state
+Updating and restarting HAproxy
+
+<span class="f6"><span class="bold">Building OCP node: node-2.test.home</span></span>
+
+Configuration:
+- vCPUs:  2
+- Memory: 4000 MiB
+- MAC Addr: 52:54:00:4a:8c:21
+
+Starting install...
+Retrieving file rhcos-live-kernel-x86_64...                 | 9.6 MB  00:00     
+Retrieving file rhcos-live-initramfs.x86_64.img...          |  85 MB  00:00     
+Allocating 'node-2.test.home.qcow2'                         |  30 GB  00:00     
+
+Domain is still running. Installation may be in progress.
+Waiting for the installation to complete.
+Domain has shutdown. Continuing.
+Domain creation completed.
+Restarting guest.
+
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 16: OCP Cluster Bootstrap (Time start: 16:03pm)</span></span></span>
+
 You can observe the output of the bootstrap node at this stage by issuing:
-ssh -i /root/.ssh/id_rsa_ocp core@bootstrap.prod.localdomain sudo journalctl -b -f -u bootkube.service
+ssh -i /root/.ssh/id_rsa_ocp.test core@bootstrap.test.home sudo journalctl -b -f -u bootkube.service
 
-<span style="color:#43C6DB">INFO </span>Waiting up to 20m0s for the Kubernetes API at https://api.prod.localdomain:6443... 
-<span style="color:#43C6DB">INFO </span>API v1.20.0+5fbfd19 up                       
-<span style="color:#43C6DB">INFO </span>Waiting up to 30m0s for bootstrapping to complete... 
-<span style="color:#43C6DB">INFO </span>It is now safe to remove the bootstrap resources 
-<span style="color:#43C6DB">INFO </span>Time elapsed: 15m23s                         
-Domain bootstrap.prod.localdomain destroyed
+Domain 'bootstrap.test.home' destroyed
 
-Domain bootstrap.prod.localdomain has been undefined
-Volume 'vda'(/mnt/VMs/ocp/bootstrap.prod.localdomain.qcow2) removed.
-<div class="greenoutput">
-_______________________________________________________________________________________
+Domain 'bootstrap.test.home' has been undefined
+Volume 'vda'(/mnt/VMs/bootstrap.test.home.qcow2) removed.
 
-STAGE 16: CSR Background Approval (Time start: 21:38pm)
 
-_______________________________________________________________________________________
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-STAGE 17: Prometheus Memory Footprint (Time start: 21:38pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">STAGE 17: CSR Background Approval (Time start: 16:18pm)</span></span></span>
+
+CSR approval task will run in the background and will exit automatically on cluster completion.
+
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 18: Prometheus Memory Footprint (Time start: 16:18pm)</span></span></span>
+
 configmap/cluster-monitoring-config created
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-STAGE 18: OCP - Complete Installation (Time start: 21:38pm)
-</div>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+
+<span class="f6"><span class="bold"><span class="bold">STAGE 19: OCP - Complete Installation (Time start: 16:18pm)</span></span></span>
+
 Some useful commands while waiting:
-- source ocp-setup-env  (for command line access to oc as setup)
-- tail -f /YAKKO/install-prod/.openshift_install.log
-- oc get co  (To check how operators are progressing...)
-- oc get nodes  (always good to see if your cluster has all the nodes it should...)
-- oc adm top nodes (to see how your nodes are performing based on their CPU/RAM constraints...
+- tail -f /YAKKO/install-test/.openshift_install.log
+- source ocp-setup-env ----&gt;  For access to &quot;oc&quot; at the command line
+- oc get clusteroperators -&gt;  To check operator progression, can also be &quot;oc get co&quot;
+- oc get clusterversion ---&gt;  On build, it shows you % progression, after that, cluster version
+- oc get nodes ------------&gt;  To see nodes and node status
 
-<span style="color:#43C6DB">INFO </span>Waiting up to 40m0s for the cluster at https://api.prod.localdomain:6443 to initialize... 
 
 Deleting Prometheus pods for memory reconfiguration
-pod "prometheus-k8s-0" deleted
-pod "prometheus-k8s-1" deleted
-<span style="color:#43C6DB">INFO </span>Waiting up to 10m0s for the openshift-console route to be created... 
-<span style="color:#43C6DB">INFO </span>Install complete!                            
-<span style="color:#43C6DB">INFO </span>To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/YAKKO/install-prod/auth/kubeconfig' 
-<span style="color:#43C6DB">INFO </span>Access the OpenShift web-console here: https://console-openshift-console.apps.prod.localdomain 
-<span style="color:#43C6DB">INFO </span>Login to the console with user: "kubeadmin", and password: "2uoGm-tEIqx-pyxIs-rsEV7" 
-<span style="color:#43C6DB">INFO </span>Time elapsed: 18m9s                          
 
 CSR Approvals (oc get csr) stopped...
-<div class="greenoutput">
-_______________________________________________________________________________________
 
-FINISHED OCP INSTALLATION - Fri 12 Mar 21:56:51 AEDT 2021
-Time elapsed:  37 mins 31 secs
+__________________________________________________________________________
 
-IMPORTANT:
-	- you DO NOT have a registry -> yakko ops localregistry
-	- you cannot access the cluster from another computer -> yakko ops openaccess
-	- you have no user DB -> yakko ops htpasswd administrator &  yakko ops useradd &lt;user>
-_______________________________________________________________________________________
+<span class="f6"><span class="bold"><span class="bold">FINISHED OCP INSTALLATION - Wed 11 Aug 16:35:44 AEST 2021</span></span></span>
+<span class="f6"><span class="bold"><span class="bold">Time elapsed:  37 mins 13 secs</span></span></span>
 
-</div>
-CLUSTER: prod.localdomain  
+<span class="f6"><span class="bold"><span class="bold">IMPORTANT:</span></span></span>
+<span class="f6"><span class="bold"><span class="bold"> - you can bookmark cluster info at http://192.168.100.2:8080</span></span></span>
+<span class="f6"><span class="bold"><span class="bold"> - you DO NOT have a registry -&gt; yakko ops localregistry</span></span></span>
+<span class="f6"><span class="bold"><span class="bold"> - you cannot access the cluster from another computer -&gt; yakko infra openaccess</span></span></span>
+<span class="f6"><span class="bold"><span class="bold"> - you have no user DB-&gt; yakko ops htpasswd administrator &amp;  yakko ops useradd &lt;user&gt;</span></span></span>
+<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
-Active Masters:   3
-Active Nodes:     0 (workers/infra)
-Active Operators: 31/31
+ CLUSTER: test.home  (Ver: 4.8.4  Built: 11-Aug-2021@16:35:44)
 
-The console and API server appear to be operational:
+ Active Masters:   3/3
+ Active Nodes:     2/2 (workers/infra)
+ Active Operators: 31/31
 
-Web console:   https://console-openshift-console.apps.prod.localdomain
-API server:    https://api.prod.localdomain:6443
+              state      
+ Web Console: [ ✔ ]  https://console-openshift-console.apps.test.home
+ API Server:  [ ✔ ]  https://api.test.home:6443
 
-Administrator: kubeadmin
-Password:      2uoGm-tEIqx-pyxIs-rsEV7
+ Administrator: kubeadmin
+ Password:      naW6S-ntkWW-uxhGo-ewVob
 
-- To use OpenShift's 'oc' command run: "source ocp-setup-env" in this shell.
-- To make infrastructure changes use:  "yakko infra &lt;options>"  
-- To make operational changes use:     "yakko ops &lt;options>" 
+ External access: ENABLED (to change: yakko infra changeaccess)
 
+ - To use OpenShift's 'oc' command --&gt; source ocp-setup-env  (in this shell)
+ - To make infrastructure changes ---&gt; yakko infra &lt;options&gt;
+ - To make operational changes ------&gt; yakko ops &lt;options&gt;
 
-<b>[root@bigbox YAKKO]# oc get nodes</b>
-NAME       STATUS   ROLES           AGE    VERSION
-master-0   Ready    master,worker   111m   v1.20.0+5fbfd19
-master-1   Ready    master,worker   112m   v1.20.0+5fbfd19
-master-2   Ready    master,worker   111m   v1.20.0+5fbfd19
 
 
-<b>[root@bigbox YAKKO]# oc get clusteroperators</b>
-NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
-authentication                             4.7.1     True        False         False      91m
-baremetal                                  4.7.1     True        False         False      109m
-cloud-credential                           4.7.1     True        False         False      115m
-cluster-autoscaler                         4.7.1     True        False         False      107m
-config-operator                            4.7.1     True        False         False      109m
-console                                    4.7.1     True        False         False      81m
-csi-snapshot-controller                    4.7.1     True        False         False      98m
-dns                                        4.7.1     True        False         False      106m
-etcd                                       4.7.1     True        False         False      106m
-image-registry                             4.7.1     True        False         False      102m
-ingress                                    4.7.1     True        False         False      103m
-insights                                   4.7.1     True        False         False      102m
-kube-apiserver                             4.7.1     True        False         False      105m
-kube-controller-manager                    4.7.1     True        False         False      105m
-kube-scheduler                             4.7.1     True        False         False      104m
-kube-storage-version-migrator              4.7.1     True        False         False      107m
-machine-api                                4.7.1     True        False         False      106m
-machine-approver                           4.7.1     True        False         False      108m
-machine-config                             4.7.1     True        False         False      106m
-marketplace                                4.7.1     True        False         False      106m
-monitoring                                 4.7.1     True        False         False      86m
-network                                    4.7.1     True        False         False      108m
-node-tuning                                4.7.1     True        False         False      106m
-openshift-apiserver                        4.7.1     True        False         False      101m
-openshift-controller-manager               4.7.1     True        False         False      108m
-openshift-samples                          4.7.1     True        False         False      102m
-operator-lifecycle-manager                 4.7.1     True        False         False      106m
-operator-lifecycle-manager-catalog         4.7.1     True        False         False      105m
-operator-lifecycle-manager-packageserver   4.7.1     True        False         False      103m
-service-ca                                 4.7.1     True        False         False      109m
-storage                                    4.7.1     True        False         False      109m
-
-
-<b>[root@bigbox YAKKO]# ./yakko infra addnode</b>
-_______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________
-
-
->>> ADD A NEW WORKER NODE  <<<
-
-NOTE: YAKKO will NOT TEST for capacity to handle this request, proceed with caution
-
-How many cores should be allocated to this node [2]:
-
-How much RAM (MiB) should be allocated to this node (2560-16384MiB) [4000]: 3000
-
-<div class="greenoutput">_______________________________________________________________________________________
-
-STAGE 1: KVM Worker Node Configuration (Time start: 16:05pm) </div>
-
-Configure OCP worker VM node(s) - proceed [y/n]? y
-Restarting virtual network
-Updated network net-ocp-prod persistent config and live state
-Updating and restarting HAproxy
-Building OCP node: node-1 (MAC Addr: 52:54:00:4a:66:20)
-
-Starting install...
-Retrieving file rhcos-live-kernel-x86_64...               | 9.1 MB  00:00:00
-Retrieving file rhcos-live-initramfs.x86_64.img...        |  82 MB  00:00:00
-Allocating 'node-1.prod.localdomain.qcow2'                |  20 GB  00:00:00
-
-Domain is still running. Installation may be in progress.
-Waiting for the installation to complete.
-Domain has shutdown. Continuing.
-Domain creation completed.
-Restarting guest.
-Node(s) ready to begin integration into the cluster. This will take a few minutes...
-To observe node status, run 'oc get nodes' on another terminal.
-
-Node (node-1) has been added to the cluster and is in READY state
-<div class="greenoutput">Time elapsed:  5 mins 55 secs</div>
-
-
-<b>[root@bigbox YAKKO]# oc get nodes</b>
-NAME       STATUS   ROLES           AGE     VERSION
-master-0   Ready    master,worker   125m    v1.20.0+5fbfd19
-master-1   Ready    master,worker   125m    v1.20.0+5fbfd19
-master-2   Ready    master,worker   125m    v1.20.0+5fbfd19
-node-1     Ready    worker          7m29s   v1.20.0+5fbfd19
-
-
-<b>[root@bigbox YAKKO]# ./yakko ops mastersched</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
->>> CHANGE MASTERS' SCHEDULING STATE  <<<
-
-
-This is an important change that may affect the behaviour of your workloads
-and is simply being provided by YAKKO as a mechanism to change new nodes quickly.
-Use at your own risk!
-
-Masters are currently >> SCHEDULABLE <<
-
-Change masters to [NOT SCHEDULABLE] - proceed [y/n]? y
-scheduler.config.openshift.io/cluster edited
-
-
-<b>[root@bigbox YAKKO]# oc get nodes</b>
-NAME       STATUS   ROLES    AGE    VERSION
-master-0   Ready    master   129m   v1.20.0+5fbfd19
-master-1   Ready    master   130m   v1.20.0+5fbfd19
-master-2   Ready    master   129m   v1.20.0+5fbfd19
-node-1     Ready    worker   12m    v1.20.0+5fbfd19
-     
-
-<b>[root@bigbox YAKKO]# ./yakko ops htpasswd</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
->>> ENABLE ADMIN and LOCAL PASSWORDS IN OPENSHIFT (HTPasswd) <<<
-
-You must enter a new administrator who will be granted cluster-admin role.
-Enter a new admin username to add to the HTPasswd provider [administrator]: 
-
-Enter password for user [administrator]: 
-Retype password for confirmation: 
-Warning: resource oauths/cluster is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by oc apply. oc apply should only be used on resources created declaratively by either oc create --save-config or oc apply. The missing annotation will be patched automatically.
-oauth.config.openshift.io/cluster configured
-Adding password for user administrator
-secret/htpass-secret created
-Warning: User 'administrator' not found
-clusterrole.rbac.authorization.k8s.io/cluster-admin added: "administrator"
-
-Added [administrator] admin user with cluster-admin role successfuly
-
-Disable 'kubeadmin' account - proceed [y/n]? y
-Deleting secret for 'kubeadmin' account
-secret "kubeadmin" deleted
-Note that the system:admin account is still available
-
-
-<b>[root@bigbox YAKKO]# ./yakko ops useradd</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
-Enter the name for a new user to add to the HTPasswd provider: matthew
-Enter password for user [matthew]: 
-Retype password for confirmation: 
-Adding password for user matthew
-secret/htpass-secret patched
-Warning: User 'matthew' not found
-clusterrole.rbac.authorization.k8s.io/self-provisioner added: "matthew"
-
-Success: added user  and assigned self-provisioner role.
-It may take a few moments before you can login.
-
-
-<b>[root@bigbox YAKKO]# oc login -u matthew</b>
-oc login -u matthew
-Authentication required for https://api.prod.localdomain:6443 (openshift)
-Username: matthew
-Password:
-Login successful.
-
-You don't have any projects. You can try to create a new project, by running
-
-    oc new-project <projectname>
-
-
-<b>[root@bigbox YAKKO]# oc login -u administrator</b>
-oc login -u administrator
-Logged into "https://api.prod.localdomain:6443" as "administrator" using existing credentials.
-
-You have access to 62 projects, the list has been suppressed. You can list all projects with 'oc projects'
-
-Using project "default".
-
-
-<b>[root@bigbox YAKKO]# ./yakko ops yakkotest</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
->>> DEPLOY YAKKO TEST ON THE CLUSTER!  <<<
-
-Cannot deploy YAKKO test app as there is no registry defined.
-First, run "yakko ops localregistry"
-
-
-<b>[root@bigbox YAKKO]# ./yakko ops localregistry</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
->>> ENABLE LOCAL REGISTRY IN OPENSHIFT <<<
-
-Enabling local registry (images will be lost on registry restart) - proceed [y/n]? y
-config.imageregistry.operator.openshift.io/cluster patched
-config.imageregistry.operator.openshift.io/cluster patched
-
-
-<b>[root@bigbox YAKKO]# ./yakko ops yakkotest</b>
-<div class="greenoutput"> _______________________________________________________________________________________
-
- YAKKO: Yet Another KVM Konfigurator for Openshift
-_______________________________________________________________________________________ </div>
->>> DEPLOY YAKKO TEST ON THE CLUSTER!  <<<
-
-Now using project "yakkotest" on server "https://api.prod.localdomain:6443".
-
-You can add applications to this project with the 'new-app' command. For example, try:
-
-    oc new-app rails-postgresql-example
-
-to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
-
-    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
-
---> Found image b49449b (13 days old) in image stream "openshift/httpd" under tag "latest" for "httpd:latest"
-
-    Apache httpd 2.4
-    ----------------
-    Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.
-
-    Tags: builder, httpd, httpd-24
-
-    * A source build using source code from https://github.com/ozchamo/yakko-test.git will be created
-      * The resulting image will be pushed to image stream tag "yakko:latest"
-      * Use 'oc start-build' to trigger a new build
-
---> Creating resources ...
-    imagestream.image.openshift.io "yakko" created
-    buildconfig.build.openshift.io "yakko" created
-    deployment.apps "yakko" created
-    service "yakko" created
---> Success
-    WARNING: No container image registry has been configured with the server. Automatic builds and deployments may not function.
-    Build scheduled, use 'oc logs -f buildconfig/yakko' to track its progress.
-    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
-     'oc expose service/yakko'
-    Run 'oc status' to view your app.
-route.route.openshift.io/yakko exposed
-_________________________________________________________________________
-
-
-OpenShift will begin building the project
-Inspect progress by issuing 'oc get pods -n yakkotest'
-
-Once yakkotest is up, point your browser to: http://yakkotest.apps.prod.localdomain
-
-
-/... A FEW MINUTES LATER .../
-
-
-<b>[root@bigbox YAKKO]# oc get pods</b>
-NAME                     READY   STATUS      RESTARTS   AGE
-yakko-1-build            0/1     Completed   0          101s
-yakko-2-build            0/1     Completed   0          43s
-yakko-84ff5b4448-7j8z6   1/1     Running     0          8s
-
-
-/... AND... EMBEDDED ..../
-
-
-<b>[root@bigbox YAKKO]# curl  http://yakkotest.apps.prod.localdomain</b>
-
-<div style="background-color:white;color:black";>
-<center>
-<img src=yakkologo.png>
-<h1>If you can see this, "yakkotest" worked!</h1> <h2>(which means your YAKKO cluster also works)</h2> <h3>Enjoy!<h3>
-<A HREF=https://github.com/ozchamo/yakko-test>Where did this come from?</A>
-And so, what's <A HREF=https://github.com/ozchamo/YAKKO>YAKKO</A> then?
-
-</div>
-
-</div>
-
+</pre>
 </body>
 </html>
