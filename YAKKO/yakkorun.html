@@ -1,76 +1,72 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<style type="text/css">
+<style>
 
 body {
 	background-color: black;
 	border: 20px solid black;
 }
 
-pre { white-space: pre-wrap; }
-.f6 > .bold,.bold > .f6 { color: #00FFFF; font-weight: normal; font-size: 18px; }
-
-.f9 { color: #E5E5E5; }
-.b9 { background-color: #000000; font-size: 18px; }
-.f9 > .bold,.bold > .f9, body.f9 > pre > .bold {
-  /* Bold is heavy black on white, or bright white
-     depending on the default background */
-  color: #FFFFFF;
-  font-weight: normal;
+pre { 
+	color: white;
+	font-size: 18px;
 }
-.reverse {
-  /* CSS does not support swapping fg and bg colours unfortunately,
-     so just hardcode something that will look OK on all backgrounds. */
-  color: #000000; background-color: #E5E5E5;
-}
-.underline { text-decoration: underline; }
-.line-through { text-decoration: line-through; }
-.blink { text-decoration: blink; }
 
-/* Avoid pixels between adjacent span elements.
-   Note this only works for lines less than 80 chars
-   where we close span elements on the same line.
-*/
+.yakkostage {
+	font-weight: bold;
+	color: mediumturquoise;
+}
+
+.info {
+	color: cadetblue;
+
+}
+
+.warning {
+	color: DarkGoldenRod;
+}
+
 </style>
 </head>
 
+<body>
 
 <pre>
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold"> YAKKO: Yet Another KVM Konfigurator for Openshift</span></span></span>
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage"> YAKKO: Yet Another KVM Konfigurator for Openshift</span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 1: Gather Cluster Configuration information (Time start: 15:58pm)</span></span></span>
+<span class="yakkostage">STAGE 1: Gather Cluster Configuration information (Time start: 15:58pm)</span>
 
 This section will gather relevant information to build an OpenShift cluster on this host.
 Questions are separated by '----'. Default options are in [brackets], press enter to accept them.
 
-<span class="bold">----</span>
+----</span>
 Enter the name of the OpenShift cluster to create [&quot;test&quot;]: 
 
-<span class="bold">----</span>
+----</span>
 Enter the DOMAIN name to setup your cluster under [&quot;home&quot;]: 
 
-<span class="bold">----</span>
+----</span>
 It is recommended that this host have a fixed IP address and a resolvable hostname.
 Enter the IP address of this host on your network [&quot;192.168.100.2&quot;]: 
 
-<span class="bold">----</span>
+----</span>
 Enter the SUBNET (/24) inside KVM that you want cluster under [&quot;192.168.140&quot;]: 
 
-<span class="bold">----</span>
+----</span>
 YAKKO uses HAproxy to loadbalance access to OpenShift nodes, while also allowing
 or restricting access to either THIS host only, or clients in your local network.
 (You can change this later using 'yakko infra changeaccess')
 Allow 'open' cluster access from other clients (other than this server) (Y/N) [Y]? 
 
-<span class="bold">----</span>
+----</span>
 What release version do you want to install:
     1) Latest release available (4.8.4)
     2) Releases on disk
@@ -82,61 +78,61 @@ What release version do you want to install:
     5) Latest pre-release nightly (unknown territory...)
 Pick option number from above (1-5) [1]: 
 
-<span class="bold">----</span>
+----</span>
 Enter the directory where you wish to place the OCP VM disks for this cluster [&quot;/mnt/VMs&quot;]: /mnt/VMs/desktops/fedora-RedHat.qcow2 not reset as customized by admin to system_u:object_r:svirt_image_t:s0:c397,c766
 Changing permissions for [/mnt/VMs] and all paths above.
 All members of the tree need to have read/exec access so that user 'qemu' can run VMs in the destination.
 
-<span class="bold">----</span>
+----</span>
 How many MASTER nodes do you want to configure (1 or 3) [3]: 
 
-<span class="bold">----</span>
+----</span>
 How much RAM (MiB) should be allocated to MASTER nodes [16000]: 
 
-<span class="bold">----</span>
+----</span>
 Worker nodes can be built at cluster creation or later.
 To build a cluster with ONLY schedulable MASTER node(s), type '0'
 How many worker nodes do you want to configure at cluster build time [2]: 
 
-<span class="bold">----</span>
+----</span>
 How much RAM (MiB) should be allocated to WORKER nodes [5000]: 
 
-<span class="bold">----</span>
+----</span>
 Requested OpenShift configuration requires:
 - RAM:  50000 MiB 
 - DISK: 150 GiB 
 Accept this configuration for cluster build (Y/N) [Y]? 
 
-<span class="bold">----</span>
+----</span>
 Attempt AUTOMATIC creation of cluster &quot;test&quot; (Y/N) [Y]? 
 
-<span class="bold">----</span>
+----</span>
 Although YAKKO automates OpenShift cluster creation, you may want to customise the 
 'install-config.yaml' configuration file before cluster bootstrap, for example,
 when wanting to add a proxy server for indirect connection to the internet.
 Pause for edit of 'install-config.yaml' when file becomes available (Y/N) [N]? 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 2: Load pull secret (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 2: Load pull secret (Time start: 15:59pm)</span>
 
 Using saved pull secret
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 3: Obtain OCP binaries (Installer and RHCOS) (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 3: Obtain OCP binaries (Installer and RHCOS) (Time start: 15:59pm)</span>
 
 Using OCP Version 4.8.4 already downloaded...
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 4: Libvirt package install/start (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 4: Libvirt package install/start (Time start: 15:59pm)</span>
 
 Libvirt is installed and active
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 5: SSH key configuration (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 5: SSH key configuration (Time start: 15:59pm)</span>
 
 Generating public/private rsa key pair.
 Your identification has been saved in /root/.ssh/id_rsa_ocp.test
@@ -157,9 +153,9 @@ The key's randomart image is:
 +----[SHA256]-----+
 Agent pid 289496
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 6: Virtual Network Configuration (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 6: Virtual Network Configuration (Time start: 15:59pm)</span>
 
 Cleaning up network...
 Only NAT is supported for now
@@ -179,9 +175,9 @@ Network net-yakko-test started
 
 Virtual network is up
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 7: DNS Configuration (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 7: DNS Configuration (Time start: 15:59pm)</span>
 
 Configuring dnsmask plugin in NETWORKMANAGER and
 adding DNSmasq configuration as /etc/NetworkManager/dnsmasq.d/dnsmasq-yakko-test.conf
@@ -215,9 +211,9 @@ Aliases:
 
 testing.apps.test.home has address 192.168.100.2
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 8: Configure HTTP server for installation of all cluster components (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 8: Configure HTTP server for installation of all cluster components (Time start: 15:59pm)</span>
 
 Using port [8080] for RHCOS image delivery
 OCP will be made available by HTTP server from directory /YAKKO/images/4.8.4
@@ -255,9 +251,9 @@ changing security context of '/YAKKO/images/4.8.3'
 changing security context of '/YAKKO/images/index.html'
 changing security context of '/YAKKO/images'
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 9: Configure Load Balancer  (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 9: Configure Load Balancer  (Time start: 15:59pm)</span>
 
 Setting up HAproxy with OPEN access
 You can change this later with 'yakko infra changeaccess'
@@ -286,15 +282,15 @@ Aug 11 15:59:40 terminus haproxy[290410]:    | timeouts are set to a non-zero va
 Aug 11 15:59:40 terminus haproxy[290410]: [NOTICE] 222/155940 (290410) : New worker #1 (290413) forked
 Aug 11 15:59:40 terminus systemd[1]: Started HAProxy Load Balancer.
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 10: Configure Firewall (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 10: Configure Firewall (Time start: 15:59pm)</span>
 
 Firewall is not running. Configuration is not required.
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 11: OCP Configuration for Installation (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 11: OCP Configuration for Installation (Time start: 15:59pm)</span>
 
 Writing ocp-setup-env script for administration. Run &quot;source /YAKKO/ocp-setup-env&quot; to load post-install...
 The server has [4] CPU cores and [8] threads
@@ -302,29 +298,29 @@ The server has [4] CPU cores and [8] threads
 Generating INSTALL CONFIG file...
 Making a reference copy of install-config.yaml as install-config.yaml.original
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 12: OCP Ingest manifest and ignition files (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 12: OCP Ingest manifest and ignition files (Time start: 15:59pm)</span>
 
 Creating manifests...
-INFO Consuming Install Config from target directory 
-WARNING Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
-INFO Manifests created in: /YAKKO/install-test/manifests and /YAKKO/install-test/openshift 
+<span class="info">INFO </span>Consuming Install Config from target directory 
+<span class="warning">WARNING </span>Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
+<span class="info">INFO </span>Manifests created in: /YAKKO/install-test/manifests and /YAKKO/install-test/openshift 
 
 Creating OCP Cluster ignition files required for node configuration
-INFO Consuming Common Manifests from target directory 
-INFO Consuming OpenShift Install (Manifests) from target directory 
-INFO Consuming Worker Machines from target directory 
-INFO Consuming Master Machines from target directory 
-INFO Consuming Openshift Manifests from target directory 
-INFO Ignition-Configs created in: /YAKKO/install-test and /YAKKO/install-test/auth 
+<span class="info">INFO </span>Consuming Common Manifests from target directory 
+<span class="info">INFO </span>Consuming OpenShift Install (Manifests) from target directory 
+<span class="info">INFO </span>Consuming Worker Machines from target directory 
+<span class="info">INFO </span>Consuming Master Machines from target directory 
+<span class="info">INFO </span>Consuming Openshift Manifests from target directory 
+<span class="info">INFO </span>Ignition-Configs created in: /YAKKO/install-test and /YAKKO/install-test/auth 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 13: KVM Bootstrap Host Configuration (Time start: 15:59pm)</span></span></span>
+<span class="yakkostage">STAGE 13: KVM Bootstrap Host Configuration (Time start: 15:59pm)</span>
 
 
-<span class="f6"><span class="bold">Building OCP node: bootstrap.test.home</span></span>
+<span class="yakkostage">Building OCP node: bootstrap.test.home</span>
 
 Configuration:
 - vCPUs:  2
@@ -343,12 +339,12 @@ Domain creation completed.
 Restarting guest.
 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 14: KVM Master Nodes Configuration (Time start: 16:00pm)</span></span></span>
+<span class="yakkostage">STAGE 14: KVM Master Nodes Configuration (Time start: 16:00pm)</span>
 
 
-<span class="f6"><span class="bold">Building OCP node: master-0.test.home</span></span>
+<span class="yakkostage">Building OCP node: master-0.test.home</span>
 
 Configuration:
 - vCPUs:  4
@@ -367,7 +363,7 @@ Domain creation completed.
 Restarting guest.
 
 
-<span class="f6"><span class="bold">Building OCP node: master-1.test.home</span></span>
+<span class="yakkostage">Building OCP node: master-1.test.home</span>
 
 Configuration:
 - vCPUs:  4
@@ -386,7 +382,7 @@ Domain creation completed.
 Restarting guest.
 
 
-<span class="f6"><span class="bold">Building OCP node: master-2.test.home</span></span>
+<span class="yakkostage">Building OCP node: master-2.test.home</span>
 
 Configuration:
 - vCPUs:  4
@@ -405,15 +401,15 @@ Domain creation completed.
 Restarting guest.
 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 15: KVM Worker Node Configuration (Time start: 16:02pm)</span></span></span>
+<span class="yakkostage">STAGE 15: KVM Worker Node Configuration (Time start: 16:02pm)</span>
 
 Restarting virtual network
 Updated network net-yakko-test persistent config and live state
 Updating and restarting HAproxy
 
-<span class="f6"><span class="bold">Building OCP node: node-1.test.home</span></span>
+<span class="yakkostage">Building OCP node: node-1.test.home</span>
 
 Configuration:
 - vCPUs:  2
@@ -435,7 +431,7 @@ Restarting virtual network
 Updated network net-yakko-test persistent config and live state
 Updating and restarting HAproxy
 
-<span class="f6"><span class="bold">Building OCP node: node-2.test.home</span></span>
+<span class="yakkostage">Building OCP node: node-2.test.home</span>
 
 Configuration:
 - vCPUs:  2
@@ -454,39 +450,39 @@ Domain creation completed.
 Restarting guest.
 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 16: OCP Cluster Bootstrap (Time start: 16:03pm)</span></span></span>
+<span class="yakkostage">STAGE 16: OCP Cluster Bootstrap (Time start: 16:03pm)</span>
 
 You can observe the output of the bootstrap node at this stage by issuing:
 ssh -i /root/.ssh/id_rsa_ocp.test core@bootstrap.test.home sudo journalctl -b -f -u bootkube.service
 
-INFO Waiting up to 20m0s for the Kubernetes API at https://api.test.home:6443... 
-INFO API v1.21.1+38b3ecc up                       
-INFO Waiting up to 30m0s for bootstrapping to complete... 
-INFO It is now safe to remove the bootstrap resources 
-INFO Time elapsed: 14m45s                         
+<span class="info">INFO </span>Waiting up to 20m0s for the Kubernetes API at https://api.test.home:6443... 
+<span class="info">INFO </span>API v1.21.1+38b3ecc up                       
+<span class="info">INFO </span>Waiting up to 30m0s for bootstrapping to complete... 
+<span class="info">INFO </span>It is now safe to remove the bootstrap resources 
+<span class="info">INFO </span>Time elapsed: 14m45s                         
 Domain 'bootstrap.test.home' destroyed
 
 Domain 'bootstrap.test.home' has been undefined
 Volume 'vda'(/mnt/VMs/bootstrap.test.home.qcow2) removed.
 
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 17: CSR Background Approval (Time start: 16:18pm)</span></span></span>
+<span class="yakkostage">STAGE 17: CSR Background Approval (Time start: 16:18pm)</span>
 
 CSR approval task will run in the background and will exit automatically on cluster completion.
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 18: Prometheus Memory Footprint (Time start: 16:18pm)</span></span></span>
+<span class="yakkostage">STAGE 18: Prometheus Memory Footprint (Time start: 16:18pm)</span>
 
 configmap/cluster-monitoring-config created
 
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
-<span class="f6"><span class="bold"><span class="bold">STAGE 19: OCP - Complete Installation (Time start: 16:18pm)</span></span></span>
+<span class="yakkostage">STAGE 19: OCP - Complete Installation (Time start: 16:18pm)</span>
 
 Some useful commands while waiting:
 - tail -f /YAKKO/install-test/.openshift_install.log
@@ -502,15 +498,15 @@ CSR Approvals (oc get csr) stopped...
 
 __________________________________________________________________________
 
-<span class="f6"><span class="bold"><span class="bold">FINISHED OCP INSTALLATION - Wed 11 Aug 16:35:44 AEST 2021</span></span></span>
-<span class="f6"><span class="bold"><span class="bold">Time elapsed:  37 mins 13 secs</span></span></span>
+<span class="yakkostage">FINISHED OCP INSTALLATION - Wed 11 Aug 16:35:44 AEST 2021</span>
+<span class="yakkostage">Time elapsed:  37 mins 13 secs</span>
 
-<span class="f6"><span class="bold"><span class="bold">IMPORTANT:</span></span></span>
-<span class="f6"><span class="bold"><span class="bold"> - you can bookmark cluster info at http://192.168.100.2:8080</span></span></span>
-<span class="f6"><span class="bold"><span class="bold"> - you DO NOT have a registry -&gt; yakko ops localregistry</span></span></span>
-<span class="f6"><span class="bold"><span class="bold"> - you cannot access the cluster from another computer -&gt; yakko infra openaccess</span></span></span>
-<span class="f6"><span class="bold"><span class="bold"> - you have no user DB-&gt; yakko ops htpasswd administrator &amp;  yakko ops useradd &lt;user&gt;</span></span></span>
-<span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
+<span class="yakkostage">IMPORTANT:</span>
+<span class="yakkostage"> - you can bookmark cluster info at http://192.168.100.2:8080</span>
+<span class="yakkostage"> - you DO NOT have a registry -&gt; yakko ops localregistry</span>
+<span class="yakkostage"> - you cannot access the cluster from another computer -&gt; yakko infra openaccess</span>
+<span class="yakkostage"> - you have no user DB-&gt; yakko ops htpasswd administrator &amp;  yakko ops useradd &lt;user&gt;</span>
+<span class="yakkostage">__________________________________________________________________________</span>
 
  CLUSTER: test.home  (Ver: 4.8.4  Built: 11-Aug-2021@16:35:44)
 
