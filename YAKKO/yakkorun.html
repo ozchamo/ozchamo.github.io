@@ -29,7 +29,7 @@ pre { white-space: pre-wrap; }
 </style>
 </head>
 
-<body class="f9 b9">
+
 <pre>
 
 <span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
@@ -301,8 +301,17 @@ Making a reference copy of install-config.yaml as install-config.yaml.original
 <span class="f6"><span class="bold"><span class="bold">STAGE 12: OCP Ingest manifest and ignition files (Time start: 15:59pm)</span></span></span>
 
 Creating manifests...
+INFO Consuming Install Config from target directory 
+WARNING Making control-plane schedulable by setting MastersSchedulable to true for Scheduler cluster settings 
+INFO Manifests created in: /YAKKO/install-test/manifests and /YAKKO/install-test/openshift 
 
 Creating OCP Cluster ignition files required for node configuration
+INFO Consuming Common Manifests from target directory 
+INFO Consuming OpenShift Install (Manifests) from target directory 
+INFO Consuming Worker Machines from target directory 
+INFO Consuming Master Machines from target directory 
+INFO Consuming Openshift Manifests from target directory 
+INFO Ignition-Configs created in: /YAKKO/install-test and /YAKKO/install-test/auth 
 
 <span class="f6"><span class="bold"><span class="bold">__________________________________________________________________________</span></span></span>
 
@@ -446,6 +455,11 @@ Restarting guest.
 You can observe the output of the bootstrap node at this stage by issuing:
 ssh -i /root/.ssh/id_rsa_ocp.test core@bootstrap.test.home sudo journalctl -b -f -u bootkube.service
 
+INFO Waiting up to 20m0s for the Kubernetes API at https://api.test.home:6443... 
+INFO API v1.21.1+38b3ecc up                       
+INFO Waiting up to 30m0s for bootstrapping to complete... 
+INFO It is now safe to remove the bootstrap resources 
+INFO Time elapsed: 14m45s                         
 Domain 'bootstrap.test.home' destroyed
 
 Domain 'bootstrap.test.home' has been undefined
